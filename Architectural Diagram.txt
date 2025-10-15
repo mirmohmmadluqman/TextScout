@@ -1,6 +1,7 @@
 +----------------+     +----------------+     +----------------+
 | CLI Args       | --> | main.rs        | --> | lib.rs         |
-| (clap/env)     |     | (parse, run)   |     | (search logic) |
+| (command line) |     | (build Config, |     | (run() → search|
+|                |     |  parse args)   |     | logic)         |
 +----------------+     +----------------+     +----------------+
                               |                       |
                               v                       v
