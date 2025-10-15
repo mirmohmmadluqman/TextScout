@@ -1,21 +1,17 @@
-use clap::Parser;
+use std::env;
 use std::process;
-use text_scout::{Config, run};
 
-#[derive(Parser, Debug)]
-#[command(version, about, long_about = None)]
-struct Args {
-    query: String,
-    file_path: String,
-    #[arg(short, long)]
-    ignore_case: bool,
-}
+use text_scout::Config;
 
 fn main() {
-    let args = Args::parse();
-    let config = Config::new(args.query, args.file_path, args.ignore_case);
+    let args: Vec<String> = env::args().collect();
 
-    if let Err(e) = run(config) {
+    let config = Config::build(&args).unwrap_or_else(|err| {
+        eprintln!("Problem parsing arguments: {}", err);
+        process::exit(1);
+    });
+
+    if let Err(e) = text_scout::run(config) {
         eprintln!("Application error: {}", e);
         process::exit(1);
     }
