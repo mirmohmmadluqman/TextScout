@@ -1,59 +1,82 @@
 # TextScout
 
-[![Rust](https://img.shields.io/badge/Rust-1.75%2B-blue?logo=rust)](https://www.rust-lang.org/)
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/mirmohmmadluqman/TextScout/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Rust](https://img.shields.io/badge/Rust-Programming-orange?style=for-the-badge&logo=rust)](https://www.rust-lang.org/)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge)](#)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](#)
 
-A minimal command-line tool for searching files, inspired by `grep`. Built with Rust for speed and safety.
+A lightweight command-line file search tool built in Rust, inspired by `grep`.
 
 ## Overview
 
-TextScout reads a file and prints lines containing a specified query string. It supports case-insensitive searching via the `IGNORE_CASE` environment variable.
-
-This project demonstrates:
-- CLI argument parsing with `clap`
-- File I/O with the standard library
-- Modular code organization (main.rs for CLI, lib.rs for logic)
-- Error handling with `Result` and the `?` operator
-- Unit tests for core functionality
+TextScout searches for text patterns in files and displays matching lines. It demonstrates core Rust concepts including:
+- File I/O with error handling
+- Command-line argument parsing
+- Modular code organization (binary + library)
+- Environment variable configuration
+- Iterator patterns and functional programming
+- Test-driven development
 
 ## Features
 
-- Search for a query string in a file
-- Case-insensitive mode (set `IGNORE_CASE=1`)
-- Outputs matching lines to stdout
-- Errors to stderr
-- Cross-platform binary
+- Fast case-sensitive text search
+- Optional case-insensitive mode via environment variable
+- Clean error handling with descriptive messages
+- Modular architecture separating CLI from core logic
+- Comprehensive unit tests
 
 ## Usage
-
 ```bash
-# Basic search
-cargo run -- "query" path/to/file.txt
+# Basic search (case-sensitive)
+cargo run -- "frog" poem.txt
 
 # Case-insensitive search
-IGNORE_CASE=1 cargo run -- "Query" path/to/file.txt
+IGNORE_CASE=1 cargo run -- "nobody" poem.txt
+
+# Or build and run the binary
+cargo build --release
+./target/release/text_scout "frog" poem.txt
 ```
 
-Example:
+## Architecture
 ```
-$ cargo run -- "duct" poem.txt
-safe, fast, productive.
++----------------+     +----------------+     +----------------+
+| CLI Args       | --> | main.rs        | --> | lib.rs         |
+| (env::args)    |     | (parse args,   |     | (search logic, |
+|                |     |  build Config) |     |  file I/O)     |
++----------------+     +----------------+     +----------------+
+                              |                       |
+                              v                       v
+                       +----------------+     +----------------+
+                       | Stdout (lines) |     | Stderr (errors)|
+                       +----------------+     +----------------+
 ```
 
-## Installation
+## Testing
+```bash
+# Run all tests
+cargo test
 
-1. Install Rust: https://rustup.rs/
-2. Clone the repo: `git clone https://github.com/mirmohmmadluqman/TextScout`
-3. Build: `cargo build --release`
-4. Run: `./target/release/textscout "query" file.txt`
+# Run with output
+cargo test -- --nocapture
+```
 
 ## Learning Focus
 
-- File reading with `std::fs::read_to_string`
-- String processing with iterators and `filter`
-- Ownership and borrowing in search functions
-- Test-driven development for library funcs
+This project covers:
+- **Chapter 7**: Organizing code with modules and crates
+- **Chapter 8**: Working with strings and vectors
+- **Chapter 9**: Error handling with `Result` and `?` operator
+- **Chapter 10**: Generic lifetimes in function signatures
+- **Chapter 11**: Writing automated tests
+
+## Project Status
+
+- Core search functionality  
+- Case-sensitive and insensitive modes  
+- Error handling  
+- Unit tests  
+- Integration tests (planned)  
+- Regex support (planned)  
 
 ## License
 
