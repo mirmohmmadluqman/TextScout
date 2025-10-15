@@ -4,10 +4,14 @@ use std::process;
 use text_scout::Config;
 
 fn main() {
-    println!("╔═════════════════════════════════╗");
-    println!("║       Welcome to TextScout!     ║");
-    println!("║   Fast & minimal file search    ║");
-    println!("╚═════════════════════════════════╝\n");
+println!("╔══════════════════════════════════════════════════════════╗");
+println!("║   TextScout - Lightweight Rust File Search               ║");
+println!("║──────────────────────────────────────────────────────────║");
+println!("║   Usage   : text_scout <query> <file>                    ║");
+println!("║   Example : text_scout duct poem.txt                     ║");
+println!("║   Hint    : Set IGNORE_CASE=1 for case-insensitive mode  ║");
+println!("╚══════════════════════════════════════════════════════════╝");
+
 
     let args: Vec<String> = env::args().collect();
 
