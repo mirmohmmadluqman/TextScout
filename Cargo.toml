@@ -1,5 +1,4 @@
 [package]
-name = "text_scout"  # Don't use Capital T and S #fixed
 name = "text_scout"
 version = "0.1.0"
 edition = "2021"
